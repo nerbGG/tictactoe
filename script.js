@@ -10,7 +10,7 @@ let gameOver = false;
 
 const handleClick = (event, rPos,cPos) =>{
     // console.log(event);
-    const element = event.target;
+    const element = event.target
     // not allow the same square to be clicked
     if(filledIn.includes(element.id) || gameOver){
         return;
@@ -24,6 +24,11 @@ const handleClick = (event, rPos,cPos) =>{
     if(checkWinning(rPos, cPos)){
         document.getElementById('header').innerHTML=`${state[turn].name} (${state[turn].symbol}) is the winner!!!`;
         gameOver = true;
+        return;
+    }
+
+    if(filledIn.length === 9 ){
+        document.getElementById('header').innerHTML=`It's a Tie!!!`;
         return;
     }
 
@@ -48,7 +53,7 @@ const checkWinning = (rPos, cPos) => {
     }
 
    const rowIsAllSame = checkRow(newArr,rPos);
-   const columnIsAllSame = checkColumn(newArr, rPos, cPos);
+   const columnIsAllSame = checkColumn(newArr, cPos);
    const diagLRIsAllSame = checkLRDiag(newArr);
    const diagRLIsAllSame = checkRLDiag(newArr);
 
@@ -100,7 +105,7 @@ const checkRLDiag = (squareList)=>{
     let allSame = true;
     let j = 2;
     for(let i = 0; i<3; i++){
-        const e = squareList[i][j];
+        const e = squareList[i][j]
         if(e.innerHTML !== state[turn].symbol ){
             allSame = false;
             break;
